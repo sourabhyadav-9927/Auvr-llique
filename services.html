@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f5ef">
+
+  <meta name="description" content="Explore our bespoke hair, beauty, and ritual services at Auvréllique in Navi Mumbai. From precision cuts and balayage to rejuvenating scalp spas and bridal artistry.">
+
+  <title>Services & Rituals | Auvréllique — Luxury Hair & Beauty</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+
+  <style>
+    /* ========================================
+       SERVICES PAGE STYLES
+    ======================================== */
+
+    .services-hero {
+      padding: 85px 0 75px;
+      background: var(--cream);
+      text-align: center;
+    }
+
+    .services-hero .eyebrow {
+      margin-bottom: 18px;
+    }
+
+    .services-hero h1 {
+      font-size: clamp(42px, 6vw, 70px);
+      letter-spacing: -1.2px;
+    }
+
+    .services-hero h1 em {
+      color: var(--gold);
+    }
+
+    .services-hero p.hero-subtitle {
+      max-width: 620px;
+      margin: 22px auto 0;
+      color: var(--brown-soft);
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    /* SUB-NAVIGATION PILLS */
+
+    .services-subnav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 253, 249, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+
+    .subnav-track {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 15px;
+    }
+
+    .subnav-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .subnav-link {
+      padding: 9px 18px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--brown-soft);
+      border: 1px solid var(--border);
+      background: var(--white);
+      white-space: nowrap;
+      transition: all 0.25s ease;
+    }
+
+    .subnav-link:hover {
+      background: var(--brown);
+      color: var(--white);
+      border-color: var(--brown);
+    }
+
+    /* CATEGORY SECTIONS */
+
+    .services-category {
+      padding: 90px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .services-category:nth-child(even) {
+      background: var(--cream);
+    }
+
+    .services-category:nth-child(odd) {
+      background: var(--ivory);
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 65px;
+      align-items: start;
+    }
+
+    .category-visual {
+      position: sticky;
+      top: 90px;
+    }
+
+    .category-image-wrap {
+      position: relative;
+      height: 480px;
+      overflow: hidden;
+      background: #e9dfd4;
+    }
+
+    .category-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .category-image-wrap:hover img {
+      transform: scale(1.04);
+    }
+
+    .category-tag {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      padding: 8px 14px;
+      background: var(--ivory);
+      color: var(--brown);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .category-quote {
+      margin-top: 24px;
+      padding: 22px;
+      border-left: 2px solid var(--gold);
+      background: var(--white);
+      font-family: var(--font-heading);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--brown);
+    }
+
+    /* SERVICE MENU LIST */
+
+    .category-content .eyebrow {
+      margin-bottom: 12px;
+    }
+
+    .category-content h2 {
+      font-size: clamp(30px, 3.8vw, 42px);
+      letter-spacing: -0.5px;
+    }
+
+    .category-content h2 em {
+      color: var(--gold);
+    }
+
+    .category-description {
+      margin-top: 14px;
+      color: var(--brown-soft);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .service-menu-items {
+      margin-top: 35px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .menu-item {
+      padding: 24px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .menu-item:hover {
+      border-color: var(--gold);
+      box-shadow: 0 8px 24px rgba(52, 40, 32, 0.05);
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 15px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .menu-item-title {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      color: var(--brown);
+    }
+
+    .menu-item-price {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .menu-item-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--brown-soft);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .menu-item-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .menu-item-body {
+      margin-top: 10px;
+      color: var(--brown-soft);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .menu-item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #f2ece4;
+    }
+
+    .menu-item-note {
+      font-size: 11px;
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .menu-item-book {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--brown);
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .menu-item-book:hover {
+      color: var(--gold);
+      transform: translateX(3px);
+    }
+
+    /* RITUAL PACKAGES SECTION */
+
+    .packages-section {
+      padding: 95px 0;
+      background: #f4ede2;
+    }
+
+    .packages-heading {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 55px;
+    }
+
+    .packages-heading h2 {
+      margin-top: 12px;
+      font-size: clamp(32px, 4vw, 46px);
+    }
+
+    .packages-heading h2 em {
+      color: var(--gold);
+    }
+
+    .packages-heading p {
+      margin-top: 15px;
+      color: var(--brown-soft);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .package-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 38px 30px;
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    .package-card.featured {
+      border: 2px solid var(--gold);
+      box-shadow: 0 12px 30px rgba(182, 151, 101, 0.12);
+    }
+
+    .package-badge {
+      position: absolute;
+      top: -12px;
+      right: 25px;
+      padding: 5px 12px;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .package-card .eyebrow {
+      margin-bottom: 8px;
+    }
+
+    .package-card h3 {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      color: var(--brown);
+    }
+
+    .package-price {
+      margin: 18px 0 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .package-price .amount {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .package-price .duration {
+      font-size: 11px;
+      color: var(--brown-soft);
+      margin-left: 6px;
+    }
+
+    .package-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 30px;
+      flex-grow: 1;
+    }
+
+    .package-list li {
+      font-size: 12px;
+      color: var(--brown);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.6;
+    }
+
+    .package-list li span.check {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .package-card .button {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* PHILOSOPHY / STANDARDS SECTION */
+
+    .standards-section {
+      padding: 90px 0;
+      background: var(--ivory);
+    }
+
+    .standards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .standard-box {
+      padding: 30px 24px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .standard-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-size: 22px;
+      background: var(--cream);
+    }
+
+    .standard-box h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: var(--brown);
+    }
+
+    .standard-box p {
+      font-size: 12px;
+      color: var(--brown-soft);
+      line-height: 1.8;
+    }
+
+    /* FAQ SECTION */
+
+    .faq-section {
+      padding: 90px 0;
+      background: var(--cream);
+    }
+
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .faq-heading h2 {
+      margin-top: 14px;
+      font-size: clamp(32px, 4vw, 44px);
+    }
+
+    .faq-heading h2 em {
+      color: var(--gold);
+    }
+
+    .faq-heading p {
+      margin-top: 16px;
+      color: var(--brown-soft);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-card {
+      padding: 24px 26px;
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    .faq-card h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      color: var(--brown);
+      margin-bottom: 10px;
+    }
+
+    .faq-card p {
+      color: var(--brown-soft);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    /* RESPONSIVE DESIGN */
+
+    @media (max-width: 992px) {
+      .category-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .category-visual {
+        position: static;
+      }
+
+      .category-image-wrap {
+        height: 380px;
+      }
+
+      .packages-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .standards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .faq-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .services-hero {
+        padding: 60px 0 50px;
+      }
+
+      .services-category {
+        padding: 65px 0;
+      }
+
+      .category-image-wrap {
+        height: 280px;
+      }
+
+      .menu-item {
+        padding: 20px 16px;
+      }
+
+      .menu-item-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .standards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement">
+    A LITTLE LUXURY, JUST FOR YOU
+    <span>—</span>
+    Discover your signature style
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+
+      <a href="index.html" class="brand" aria-label="Auvréllique home">
+        <span class="brand-name">AUVRÉLLIQUE</span>
+        <span class="brand-subtitle">HAIR & BEAUTY</span>
+      </a>
+
+      <button class="menu-toggle"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">Our Story</a>
+        <a class="active" href="services.html">Services</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+        <a class="nav-book" href="booking.html">
+          Book a Visit <span>↗</span>
+        </a>
+      </div>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO SECTION -->
+    <section class="services-hero">
+      <div class="container">
+        <p class="eyebrow">TAILORED BEAUTY & CARE</p>
+        <h1>Our Services & <em>Rituals.</em></h1>
+        <p class="hero-subtitle">
+          From couture haircuts and French balayage to restorative scalp spas
+          and bespoke bridal artistry—every treatment is designed around your
+          unique aesthetic with botanical care and undivided attention.
+        </p>
+      </div>
+    </section>
+
+    <!-- CATEGORY SUBNAV -->
+    <nav class="services-subnav" aria-label="Services categories navigation">
+      <div class="container subnav-track">
+        <a href="#hair" class="subnav-link">Hair & Styling</a>
+        <a href="#color" class="subnav-link">Colour & Balayage</a>
+        <a href="#rituals" class="subnav-link">Scalp & Hair Spas</a>
+        <a href="#skincare" class="subnav-link">Facials & Skin</a>
+        <a href="#bridal" class="subnav-link">Bridal Artistry</a>
+        <a href="#packages" class="subnav-link">Curated Packages</a>
+      </div>
+    </nav>
+
+    <!-- 01. HAIR & STYLING -->
+    <section class="services-category" id="hair">
+      <div class="container category-grid">
+
+        <div class="category-visual">
+          <div class="category-image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=85"
+              alt="Stylist creating precision haircut">
+            <span class="category-tag">Category 01</span>
+          </div>
+          <div class="category-quote">
+            "A thoughtful haircut should move naturally with your life and elevate your everyday confidence."
+          </div>
+        </div>
+
+        <div class="category-content">
+          <p class="eyebrow">PRECISION & MOVEMENT</p>
+          <h2>Hair Architecture & <em>Styling.</em></h2>
+          <p class="category-description">
+            Every haircut begins with a personal consultation exploring your bone structure,
+            daily routine, and personal texture. Completed with an artisan botanical wash and signature blowout.
+          </p>
+
+          <div class="service-menu-items">
+
+            <!-- Item 1 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Couture Haircut & Signature Blowout</h3>
+                <span class="menu-item-price">₹1,800</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 60 Mins</span>
+                <span>• In-depth Consultation</span>
+                <span>• Botanical Wash</span>
+              </div>
+              <p class="menu-item-body">
+                Detailed scalp analysis, invigorating wash, tailored haircut calibrated to your natural fall, and an effortless, high-sheen blowout.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Includes luxury styling finish</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 2 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Auvréllique Velvet Blowout</h3>
+                <span class="menu-item-price">₹1,200</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 45 Mins</span>
+                <span>• Thermal Defense</span>
+                <span>• Bouncy or Sleek</span>
+              </div>
+              <p class="menu-item-body">
+                Deep conditioning rinse followed by your choice of Parisian volume, relaxed brushed waves, or glass-like mirror smooth finish.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Perfect for dinner or meetings</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 3 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Silk Press & Thermal Therapy</h3>
+                <span class="menu-item-price">₹2,200</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 75 Mins</span>
+                <span>• Moisture Seal</span>
+                <span>• Zero Chemical</span>
+              </div>
+              <p class="menu-item-body">
+                Multi-phase hydration lock and gentle ceramic precision smoothing that leaves natural textures weightless, glossy, and silky without chemical alteration.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Lasts until next wash</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 4 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Special Occasion & Red Carpet Updo</h3>
+                <span class="menu-item-price">₹2,800</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 75 Mins</span>
+                <span>• Textured Bun</span>
+                <span>• Chignon or Ponytail</span>
+              </div>
+              <p class="menu-item-body">
+                Architectural buns, airy romantic twists, or sculpted Hollywood waves designed to hold with grace all evening.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Accessories setting included</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 02. COLOUR & BALAYAGE -->
+    <section class="services-category" id="color">
+      <div class="container category-grid">
+
+        <div class="category-visual">
+          <div class="category-image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=900&q=85"
+              alt="Rich balayage and dimensional hair color">
+            <span class="category-tag">Category 02</span>
+          </div>
+          <div class="category-quote">
+            "Great hair colour shouldn't look painted on; it should catch the sunlight with nuanced, soft dimension."
+          </div>
+        </div>
+
+        <div class="category-content">
+          <p class="eyebrow">ARTISAN TONES & GLOSS</p>
+          <h2>Dimensional Colour & <em>Balayage.</em></h2>
+          <p class="category-description">
+            We use low-ammonia Italian and French formulas enriched with bond-building proteins.
+            Each formula is individually blended to flatter your skin tone and soften your regrowth.
+          </p>
+
+          <div class="service-menu-items">
+
+            <!-- Item 1 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Signature French Balayage</h3>
+                <span class="menu-item-price">₹5,500+</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 180 Mins</span>
+                <span>• Freehand Painting</span>
+                <span>• Tonal Glaze</span>
+              </div>
+              <p class="menu-item-body">
+                Custom hand-painted ribbons of light that grow out seamlessly. Includes bonding treatment, bespoke tonal glaze, and signature styling.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Price varies by hair density</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 2 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Global Color & Botanical Shine</h3>
+                <span class="menu-item-price">₹3,400+</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 90 Mins</span>
+                <span>• Full Coverage</span>
+                <span>• Mirror Gloss</span>
+              </div>
+              <p class="menu-item-body">
+                Lustrous all-over single tone from deep espresso and golden chestnut to warm honey. Delivers rich pigment saturation and silky shine.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">100% gentle grey blending</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 3 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Babylights & Face-Framing Glow</h3>
+                <span class="menu-item-price">₹4,200+</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 120 Mins</span>
+                <span>• Micro-weaves</span>
+                <span>• Money-piece Accent</span>
+              </div>
+              <p class="menu-item-body">
+                Ultra-fine micro foils concentrated around the hairline and crown to create the subtle brightness of sun-kissed natural hair.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Subtle & low-maintenance</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 4 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">High-Gloss Refresh & Tonal Meltdown</h3>
+                <span class="menu-item-price">₹2,000</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 45 Mins</span>
+                <span>• Anti-Brass</span>
+                <span>• Instant Reflection</span>
+              </div>
+              <p class="menu-item-body">
+                Revitalize dulling highlights or neutralize unwanted brassiness between major colour services with an acidic conditioning glaze.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Ideal 6-week maintenance</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 03. SCALP & HAIR RITUALS -->
+    <section class="services-category" id="rituals">
+      <div class="container category-grid">
+
+        <div class="category-visual">
+          <div class="category-image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=900&q=85"
+              alt="Relaxing Japanese head spa and scalp treatment">
+            <span class="category-tag">Category 03</span>
+          </div>
+          <div class="category-quote">
+            "Healthy, resilient hair begins at the scalp. True nourishment is a restorative ritual."
+          </div>
+        </div>
+
+        <div class="category-content">
+          <p class="eyebrow">RESTORATIVE WELLNESS</p>
+          <h2>Japanese Head Spa & <em>Hair Rituals.</em></h2>
+          <p class="category-description">
+            Escape the stress of modern life with holistic scalp therapies combining warm herbal steam,
+            acupressure scalp massage, and molecular bond reconstruction.
+          </p>
+
+          <div class="service-menu-items">
+
+            <!-- Item 1 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Auvréllique Japanese Head Spa</h3>
+                <span class="menu-item-price">₹2,800</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 75 Mins</span>
+                <span>• Micro-Mist Steam</span>
+                <span>• Acupressure Massage</span>
+              </div>
+              <p class="menu-item-body">
+                Exfoliating botanical clay scrub, waterfall halo rinse, deep acupressure scalp and neck massage, and nutrient mist to purify follicles and relieve tension.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Our most requested relaxation ritual</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 2 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Molecular Bond Rebuilding (Olaplex / K18)</h3>
+                <span class="menu-item-price">₹2,400</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 50 Mins</span>
+                <span>• Polypeptide Infusion</span>
+                <span>• Damage Repair</span>
+              </div>
+              <p class="menu-item-body">
+                Reverses chemical damage and heat degradation from the core. Reconnects broken keratin chains for touchable strength and bounce.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Ideal before or after colour</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 3 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Organic Botanical Moisture Infusion</h3>
+                <span class="menu-item-price">₹2,000</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 45 Mins</span>
+                <span>• Cold-Pressed Oils</span>
+                <span>• Warm Towel Wrap</span>
+              </div>
+              <p class="menu-item-body">
+                Deep conditioning masque infused with argan, jojoba, and camellia seed oils to restore elasticity and eliminate frizz on dry, thirsty hair.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Leaves hair feather-light</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 4 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Anti-Frizz Keratin Smoothing Therapy</h3>
+                <span class="menu-item-price">₹6,500+</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 180 Mins</span>
+                <span>• Formaldehyde-Free</span>
+                <span>• 4-5 Months Longevity</span>
+              </div>
+              <p class="menu-item-body">
+                Infuses natural keratin deep into the cuticle layer to tame humidity-induced swelling, speed up home drying time, and provide mirror smoothness.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Humidity-proof protection</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 04. FACIALS & SKINCARE -->
+    <section class="services-category" id="skincare">
+      <div class="container category-grid">
+
+        <div class="category-visual">
+          <div class="category-image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=85"
+              alt="Custom facial skincare treatment">
+            <span class="category-tag">Category 04</span>
+          </div>
+          <div class="category-quote">
+            "Luminous skin is not about covering flaws, but restoring your barrier and coaxing out your natural glow."
+          </div>
+        </div>
+
+        <div class="category-content">
+          <p class="eyebrow">BARRIER CARE & RADIANCE</p>
+          <h2>Advanced Facials & <em>Skincare.</em></h2>
+          <p class="category-description">
+            Custom skincare treatments tailored to climate, season, and your unique skin barrier.
+            Featuring clinical-grade actives, gentle botanical enzymes, and relaxing lymphatic drainage.
+          </p>
+
+          <div class="service-menu-items">
+
+            <!-- Item 1 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Auvréllique Signature 24K Glow Facial</h3>
+                <span class="menu-item-price">₹3,500</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 75 Mins</span>
+                <span>• Ultrasonic Peel</span>
+                <span>• Peptide & Gold Masque</span>
+              </div>
+              <p class="menu-item-body">
+                Deep ultrasonic pore cleansing, micro-circulation facial massage, customized peptide ampoule, and a rejuvenating gold collagen hydro-jelly masque.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Immediate red-carpet radiance</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 2 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Hydra-Dew Moisture Infusion</h3>
+                <span class="menu-item-price">₹2,800</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 60 Mins</span>
+                <span>• Multi-molecular Hyaluronic</span>
+                <span>• Cryo-Globe Massage</span>
+              </div>
+              <p class="menu-item-body">
+                Designed to soothe dehydrated or sensitive skin exposed to pollution and sun. Cool glass globes calm redness while deep humectants lock in moisture.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Soothing & barrier-restoring</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 3 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Enzyme Brightening & Anti-Pollution Peel</h3>
+                <span class="menu-item-price">₹3,000</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 60 Mins</span>
+                <span>• Papaya & Lactic Blend</span>
+                <span>• Zero Peeling Downtime</span>
+              </div>
+              <p class="menu-item-body">
+                Gentle enzymatic resurfacing that lifts dead skin cells, softens fine textures, and fades surface hyperpigmentation without flaking or harsh redness.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Leaves skin soft & silky</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 05. BRIDAL & OCCASION MAKEUP -->
+    <section class="services-category" id="bridal">
+      <div class="container category-grid">
+
+        <div class="category-visual">
+          <div class="category-image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=85"
+              alt="Bridal beauty and editorial makeup">
+            <span class="category-tag">Category 05</span>
+          </div>
+          <div class="category-quote">
+            "Your wedding beauty should feel timeless—looking as breathtaking up close as it does in photographs decades from now."
+          </div>
+        </div>
+
+        <div class="category-content">
+          <p class="eyebrow">COUTURE MOMENTS</p>
+          <h2>Bridal Artistry & <em>Occasion Glam.</em></h2>
+          <p class="category-description">
+            From regal Indian bridal ceremonies to modern chic receptions and cocktail evenings.
+            Every look is designed to withstand humidity, lights, and tears of joy.
+          </p>
+
+          <div class="service-menu-items">
+
+            <!-- Item 1 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">The Couture Bridal Experience</h3>
+                <span class="menu-item-price">₹15,000+</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 180 Mins</span>
+                <span>• HD / Airbrush Finish</span>
+                <span>• Veil & Jewelry Setting</span>
+              </div>
+              <p class="menu-item-body">
+                Comprehensive bridal artistry including skin prep, custom lash application, transfer-resistant makeup, bridal hairstyle, dupatta/veil drape, and touch-up kit.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Trial consultations recommended</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 2 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Sangeet & Reception Statement Look</h3>
+                <span class="menu-item-price">₹7,500</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 120 Mins</span>
+                <span>• Glam Hair & Makeup</span>
+                <span>• Individual Lashes</span>
+              </div>
+              <p class="menu-item-body">
+                Luminous skin, defined eyes, high-impact soft contours, and glamorous textured hair crafted for energetic celebrations under dance floor lighting.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Photogenic all night long</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+            <!-- Item 3 -->
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Soft Glam Evening & Party Artistry</h3>
+                <span class="menu-item-price">₹4,000</span>
+              </div>
+              <div class="menu-item-meta">
+                <span>⏱ 75 Mins</span>
+                <span>• Skin-Like Foundation</span>
+                <span>• Elegant Definition</span>
+              </div>
+              <p class="menu-item-body">
+                Understated elegance focusing on velvet skin, refined brow architecture, soft smoky eyes or classic French wing, and tailored lip tones.
+              </p>
+              <div class="menu-item-footer">
+                <span class="menu-item-note">Perfect for dinner & events</span>
+                <a href="booking.html" class="menu-item-book">Reserve Experience ↗</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 06. CURATED PACKAGES -->
+    <section class="packages-section" id="packages">
+      <div class="container">
+
+        <div class="packages-heading">
+          <p class="eyebrow">INDULGENT COMBINATIONS</p>
+          <h2>Curated Beauty <em>Rituals.</em></h2>
+          <p>
+            Experience our most celebrated treatments woven together into harmonious half-day
+            rituals for complete restoration and effortless elegance.
+          </p>
+        </div>
+
+        <div class="packages-grid">
+
+          <!-- Package 1 -->
+          <div class="package-card">
+            <p class="eyebrow">THE SIGNATURE HALF-DAY</p>
+            <h3>The Glow Day Retreat</h3>
+            <div class="package-price">
+              <span class="amount">₹5,400</span>
+              <span class="duration">/ 2.5 Hours</span>
+            </div>
+            <ul class="package-list">
+              <li><span class="check">✓</span> Couture Precision Haircut & Styling</li>
+              <li><span class="check">✓</span> Japanese Head Spa & Scalp Detox</li>
+              <li><span class="check">✓</span> Hydra-Dew Express Facial Infusion</li>
+              <li><span class="check">✓</span> Herbal Tea & Luxury Consultation</li>
+            </ul>
+            <a href="booking.html" class="button button-dark">Book Retreat ↗</a>
+          </div>
+
+          <!-- Package 2 (Featured) -->
+          <div class="package-card featured">
+            <span class="package-badge">Most Popular</span>
+            <p class="eyebrow">TOTAL TRANSFORMATION</p>
+            <h3>The Balayage & Crown Ritual</h3>
+            <div class="package-price">
+              <span class="amount">₹8,800</span>
+              <span class="duration">/ 4 Hours</span>
+            </div>
+            <ul class="package-list">
+              <li><span class="check">✓</span> Bespoke French Balayage or Full Highlights</li>
+              <li><span class="check">✓</span> Olaplex Bond-Building Therapy</li>
+              <li><span class="check">✓</span> Custom Gloss Glaze & Toner</li>
+              <li><span class="check">✓</span> Signature Cut & High-Volume Velvet Blowout</li>
+            </ul>
+            <a href="booking.html" class="button button-gold">Book Ritual ↗</a>
+          </div>
+
+          <!-- Package 3 -->
+          <div class="package-card">
+            <p class="eyebrow">BRIDE-TO-BE</p>
+            <h3>Pre-Bridal Radiance Ritual</h3>
+            <div class="package-price">
+              <span class="amount">₹7,900</span>
+              <span class="duration">/ 3.5 Hours</span>
+            </div>
+            <ul class="package-list">
+              <li><span class="check">✓</span> 24K Gold Collagen Radiance Facial</li>
+              <li><span class="check">✓</span> Scalp Exfoliation & Silk Steam Infusion</li>
+              <li><span class="check">✓</span> Precision Brow Architecture & Tint</li>
+              <li><span class="check">✓</span> Complimentary Bridal Look Consultation</li>
+            </ul>
+            <a href="booking.html" class="button button-dark">Book Bridal Ritual ↗</a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STANDARDS & PHILOSOPHY -->
+    <section class="standards-section">
+      <div class="container">
+
+        <div class="section-heading" style="margin-bottom: 0;">
+          <div>
+            <p class="eyebrow">THE AUVRÉLLIQUE DISTINCTION</p>
+            <h2>Uncompromising standards in<br><em>every single detail.</em></h2>
+          </div>
+          <a href="about.html" class="text-link">Read Our Story <span>→</span></a>
+        </div>
+
+        <div class="standards-grid">
+
+          <div class="standard-box">
+            <span class="standard-icon">✦</span>
+            <h3>Bespoke Consultation</h3>
+            <p>We never begin without understanding your routine, texture, lifestyle, and aesthetic vision.</p>
+          </div>
+
+          <div class="standard-box">
+            <span class="standard-icon">🌱</span>
+            <h3>Clean Formulations</h3>
+            <p>Low-ammonia, cruelty-free European & Japanese products enriched with organic botanicals.</p>
+          </div>
+
+          <div class="standard-box">
+            <span class="standard-icon">⏳</span>
+            <h3>Unrushed Time</h3>
+            <p>One guest at a time. No overlapping schedules or hurried stylists—your session is wholly yours.</p>
+          </div>
+
+          <div class="standard-box">
+            <span class="standard-icon">☕</span>
+            <h3>Sanctuary Setting</h3>
+            <p>Serene private suites, curated herbal tea selections, warm towels, and soothing acoustic notes.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FREQUENTLY ASKED QUESTIONS -->
+    <section class="faq-section">
+      <div class="container faq-layout">
+
+        <div class="faq-heading">
+          <p class="eyebrow">QUESTIONS & ANSWERS</p>
+          <h2>Everything you need<br>to know before<br><em>your appointment.</em></h2>
+          <p>
+            Have a question that isn't answered here? Feel free to reach out to our team directly on WhatsApp or phone.
+          </p>
+          <div style="margin-top: 25px;">
+            <a href="#" data-whatsapp class="button button-dark">
+              Ask Us on WhatsApp ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="faq-list">
+
+          <div class="faq-card">
+            <h3>Do I need to book in advance?</h3>
+            <p>
+              Yes, we strongly recommend reserving your appointment at least 2–3 days in advance (and 2–3 weeks for weekend or bridal dates) to guarantee your desired time slot.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3>How should I prepare for a hair color service?</h3>
+            <p>
+              We recommend washing your hair 24–48 hours prior to your color session. Clean, dry hair without heavy dry shampoo or styling waxes allows our formulas to deposit with maximum precision.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3>Can services be customized to my specific needs?</h3>
+            <p>
+              Always. Every treatment starts with an in-depth conversation. We frequently tailor mask formulas, balayage techniques, and skincare actives specifically to your goals.
+            </p>
+          </div>
+
+          <div class="faq-card">
+            <h3>What is your cancellation and rescheduling policy?</h3>
+            <p>
+              We understand plans change. We appreciate at least 24 hours' notice if you need to reschedule so we can offer the appointment time to another guest on our waiting list.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION BANNER -->
+    <section class="booking-banner">
+      <div class="booking-banner-content">
+        <p class="eyebrow">YOUR TRANSFORMATION AWAITS</p>
+        <h2>Ready to indulge in a little<br><em>everyday luxury?</em></h2>
+        <p>Tell us your preferred service and schedule. We'll arrange everything for your visit.</p>
+        <a href="booking.html" class="button button-light">
+          Reserve Your Appointment <span>↗</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+
+    <div class="container footer-main">
+
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-name">AUVRÉLLIQUE</span>
+          <span class="brand-subtitle">HAIR & BEAUTY</span>
+        </a>
+
+        <p>
+          Beauty in every detail.<br>
+          Confidence in every moment.
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Explore</h3>
+        <a href="index.html">Home</a>
+        <a href="about.html">Our Story</a>
+        <a href="services.html">Services</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="booking.html">Book an Appointment</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Visit Us</h3>
+        <p>Navi Mumbai, Maharashtra</p>
+        <p>Mon – Sat · 10 AM – 8 PM</p>
+        <a href="contact.html">Contact & Directions ↗</a>
+      </div>
+
+      <div class="footer-column">
+        <h3>Let's Connect</h3>
+        <p>Have a look in mind? Let's talk.</p>
+        <a href="#" data-whatsapp>Chat on WhatsApp ↗</a>
+        <a href="mailto:sourabhyadav913176@gmail.com">
+          Send Us an Email ↗
+        </a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p>
+        © <span id="current-year"></span> Auvréllique.
+        All rights reserved.
+      </p>
+
+      <p>Made with care & a touch of elegance.</p>
+    </div>
+
+  </footer>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="#" class="whatsapp-float" data-whatsapp
+    aria-label="Chat with Auvréllique on WhatsApp">
+    <span>WhatsApp ↗</span>
+  </a>
+
+</body>
+</html>
