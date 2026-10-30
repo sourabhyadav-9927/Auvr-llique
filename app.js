@@ -230,15 +230,15 @@ function renderAuditorPage() {
     <div class="page page-enter-active bg-canvas py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-8">
-                <h1 class="text-3xl font-bold text-navy-900">AI Contract & Legal Notice Auditor</h1>
-                <p class="text-gray-600 mt-2">Instantly analyze legal documents for risks and translate complex jargon into plain language.</p>
+                <h1 class="text-3xl font-bold text-navy-900" data-i18n="AI Contract & Legal Notice Auditor">AI Contract & Legal Notice Auditor</h1>
+                <p class="text-gray-600 mt-2" data-i18n="Instantly analyze legal documents for risks and translate complex jargon into plain language.">Instantly analyze legal documents for risks and translate complex jargon into plain language.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Left Column: Input -->
                 <div class="space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                        <h2 class="text-xl font-bold text-navy-900 mb-4">1. Select or Upload Document</h2>
+                        <h2 class="text-xl font-bold text-navy-900 mb-4">1. <span data-i18n="Select or Upload Document">Select or Upload Document</span></h2>
 
                         <!-- Pre-loaded samples -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
@@ -258,9 +258,9 @@ function renderAuditorPage() {
 
                         <div class="mb-4">
                             <div class="flex justify-between items-center mb-2">
-                                <label class="block text-sm font-medium text-gray-700">Or Paste Document Text</label>
+                                <label class="block text-sm font-medium text-gray-700" data-i18n="Or Paste Document Text">Or Paste Document Text</label>
                                 <label class="cursor-pointer text-sm text-navy-700 hover:text-orange-500 font-medium">
-                                    <i class="fa-solid fa-file-upload mr-1"></i> Upload File
+                                    <i class="fa-solid fa-file-upload mr-1"></i> <span data-i18n="Upload File">Upload File</span>
                                     <input type="file" id="file-upload" class="hidden" accept=".txt,.pdf,image/*" onchange="handleFileUpload(event)">
                                 </label>
                             </div>
@@ -284,7 +284,7 @@ function renderAuditorPage() {
                         </div>
 
                         <button onclick="runAudit()" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors shadow flex justify-center items-center">
-                            <i class="fa-solid fa-magnifying-glass mr-2"></i> Audit Document
+                            <i class="fa-solid fa-magnifying-glass mr-2"></i> <span data-i18n="Audit Document">Audit Document</span>
                         </button>
                     </div>
                 </div>
@@ -867,11 +867,36 @@ window.loadSampleDoc = function(id) {
     }
 }
 
-window.handleFileUpload = function(event) {
+window.handleFileUpload = async function(event) {
     const file = event.target.files[0];
-    if (file) {
-        document.getElementById('doc-input').value = `[Extracted text from ${file.name}]\n\n... (Simulated OCR content) ...`;
-        currentSelectedDoc = 1; // Default to doc 1 mock logic for simulation
+    const textarea = document.getElementById('doc-input');
+
+    if (!file) return;
+
+    textarea.value = `Loading and analyzing ${file.name}...\nPlease wait...`;
+    currentSelectedDoc = 'custom';
+
+    try {
+        if (file.type.startsWith('image/')) {
+            // Use Tesseract OCR for images
+            textarea.value = `Running OCR on image ${file.name}...\nThis may take a few seconds...`;
+            const result = await Tesseract.recognize(file, 'eng');
+            textarea.value = result.data.text;
+        } else if (file.type === 'text/plain') {
+            // Read text files directly
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                textarea.value = e.target.result;
+            };
+            reader.readAsText(file);
+        } else {
+            textarea.value = `Unsupported file format. Please upload an image or a .txt file.`;
+            currentSelectedDoc = null;
+        }
+    } catch (err) {
+        console.error("File upload error:", err);
+        textarea.value = "Error reading file. Please try again.";
+        currentSelectedDoc = null;
     }
 }
 
@@ -909,10 +934,84 @@ window.togglePiiRedaction = function() {
     }
 }
 
+function analyzeCustomText(text) {
+    const lowerText = text.toLowerCase();
+    const result = {
+        score: 0,
+        level: "Low Risk",
+        redFlags: 0,
+        cautions: 0,
+        fair: 0,
+        clauses: []
+    };
+
+    // Very basic regex/keyword engine for demonstration purposes
+    if (lowerText.includes("forfeit") || lowerText.includes("penalty")) {
+        result.clauses.push({
+            original: "Clause containing 'forfeit' or 'penalty'",
+            plain: "You may lose money or be charged a fine.",
+            type: "red",
+            citation: "Indian Contract Act, Sec 74"
+        });
+        result.redFlags++;
+        result.score += 30;
+    }
+    if (lowerText.includes("evict") || lowerText.includes("terminate without notice")) {
+        result.clauses.push({
+            original: "Clause mentioning eviction or sudden termination",
+            plain: "You can be kicked out or the agreement ended without warning.",
+            type: "red",
+            citation: "Rent Control / Contract Act"
+        });
+        result.redFlags++;
+        result.score += 40;
+    }
+    if (lowerText.includes("arrest") || lowerText.includes("non-bailable")) {
+        result.clauses.push({
+            original: "Mentions arrest or non-bailable terms",
+            plain: "This document threatens severe police action or jail.",
+            type: "red",
+            citation: "BNSS / BNS Guidelines"
+        });
+        result.redFlags++;
+        result.score += 50;
+    }
+    if (lowerText.includes("waive") || lowerText.includes("no right to sue")) {
+        result.clauses.push({
+            original: "Waiving legal rights",
+            plain: "You are giving up your right to go to court.",
+            type: "caution",
+            citation: "Indian Contract Act, Sec 28"
+        });
+        result.cautions++;
+        result.score += 20;
+    }
+
+    if (result.clauses.length === 0) {
+        result.clauses.push({
+            original: "No specific high-risk keywords found in scan.",
+            plain: "The document appears standard, but always read carefully.",
+            type: "fair",
+            citation: "General Audit"
+        });
+        result.fair++;
+        result.score = 10;
+    }
+
+    // Cap score at 100
+    result.score = Math.min(result.score, 100);
+
+    if (result.score >= 70) result.level = "High Risk";
+    else if (result.score >= 30) result.level = "Caution";
+    else result.level = "Fair";
+
+    return result;
+}
+
 window.runAudit = function() {
     const textarea = document.getElementById('doc-input');
-    if(!textarea.value) {
-        alert("Please select or paste a document first.");
+    if(!textarea.value || textarea.value.startsWith("Loading") || textarea.value.startsWith("Running OCR")) {
+        alert("Please wait for the document to be ready or paste text first.");
         return;
     }
 
@@ -921,8 +1020,14 @@ window.runAudit = function() {
         togglePiiRedaction();
     }
 
-    const docId = currentSelectedDoc || 1; // Default to 1 if typed manually for mock
-    const result = mockAuditResults[docId];
+    let result;
+
+    if (!currentSelectedDoc || currentSelectedDoc === 'custom') {
+        result = analyzeCustomText(textarea.value);
+    } else {
+        const docId = currentSelectedDoc;
+        result = mockAuditResults[docId] || mockAuditResults[1];
+    }
 
     // Store in global state for Page 4
     globalState.contractAudit = {
@@ -1245,3 +1350,204 @@ setTimeout(() => {
         };
     }
 }, 500);
+
+
+// --- i18n Translation Dictionary ---
+const translations = {
+    'hi': {
+        'Home': 'होम',
+        'Contract Auditor': 'अनुबंध ऑडिटर',
+        'Bail Tracker': 'जमानत ट्रैकर',
+        'Legal Aid Brief': 'कानूनी सहायता ब्रीफ',
+        'Impact & Team': 'प्रभाव और टीम',
+        'AI Contract & Legal Notice Auditor': 'एआई अनुबंध और कानूनी नोटिस ऑडिटर',
+        'Instantly analyze legal documents for risks and translate complex jargon into plain language.': 'जोखिमों के लिए तुरंत कानूनी दस्तावेजों का विश्लेषण करें और जटिल शब्दावली को सरल भाषा में अनुवाद करें।',
+        'Select or Upload Document': 'दस्तावेज़ चुनें या अपलोड करें',
+        'Or Paste Document Text': 'या दस्तावेज़ का पाठ चिपकाएं',
+        'Upload File': 'फ़ाइल अपलोड करें',
+        'Audit Document': 'दस्तावेज़ का ऑडिट करें'
+    },
+    'mr': {
+        'Home': 'मुख्य पृष्ठ',
+        'Contract Auditor': 'करार ऑडिटर',
+        'Bail Tracker': 'जामीन ट्रॅकर',
+        'Legal Aid Brief': 'कायदेशीर मदत ब्रीफ',
+        'Impact & Team': 'प्रभाव आणि टीम',
+        'AI Contract & Legal Notice Auditor': 'एआय करार आणि कायदेशीर नोटीस ऑडिटर',
+        'Instantly analyze legal documents for risks and translate complex jargon into plain language.': 'जोखमींसाठी कायदेशीर कागदपत्रांचे त्वरित विश्लेषण करा आणि गुंतागुंतीच्या शब्दांचे सोप्या भाषेत भाषांतर करा.',
+        'Select or Upload Document': 'दस्तऐवज निवडा किंवा अपलोड करा',
+        'Or Paste Document Text': 'किंवा दस्तऐवजाचा मजकूर पेस्ट करा',
+        'Upload File': 'फाईल अपलोड करा',
+        'Audit Document': 'दस्तऐवजाचे ऑडिट करा'
+    },
+    'ta': {
+        'Home': 'முகப்பு',
+        'Contract Auditor': 'ஒப்பந்த ஆய்வாளர்',
+        'Bail Tracker': 'ஜாமீன் கண்காணிப்பாளர்',
+        'Legal Aid Brief': 'சட்ட உதவி சுருக்கம்',
+        'Impact & Team': 'தாக்கம் மற்றும் குழு',
+        'AI Contract & Legal Notice Auditor': 'AI ஒப்பந்தம் மற்றும் சட்ட அறிவிப்பு ஆய்வாளர்',
+        'Instantly analyze legal documents for risks and translate complex jargon into plain language.': 'ஆபத்துகளுக்கான சட்ட ஆவணங்களை உடனடியாக பகுப்பாய்வு செய்து கடினமான சொற்களை எளிய மொழியில் மொழிபெயர்க்கவும்.',
+        'Select or Upload Document': 'ஆவணத்தை தேர்ந்தெடுக்கவும் அல்லது பதிவேற்றவும்',
+        'Or Paste Document Text': 'அல்லது ஆவண உரையை ஒட்டவும்',
+        'Upload File': 'கோப்பைப் பதிவேற்று',
+        'Audit Document': 'ஆவணத்தை ஆய்வு செய்'
+    },
+    'te': {
+        'Home': 'హోమ్',
+        'Contract Auditor': 'కాంట్రాక్ట్ ఆడిటర్',
+        'Bail Tracker': 'బెయిల్ ట్రాకర్',
+        'Legal Aid Brief': 'లీగల్ ఎయిడ్ బ్రీఫ్',
+        'Impact & Team': 'ప్రభావం మరియు బృందం',
+        'AI Contract & Legal Notice Auditor': 'AI కాంట్రాక్ట్ మరియు లీగల్ నోటీసు ఆడిటర్',
+        'Instantly analyze legal documents for risks and translate complex jargon into plain language.': 'ప్రమాదాల కోసం చట్టపరమైన పత్రాలను తక్షణమే విశ్లేషించండి మరియు సంక్లిష్ట పదజాలాన్ని సాధారణ భాషలోకి అనువదించండి.',
+        'Select or Upload Document': 'పత్రాన్ని ఎంచుకోండి లేదా అప్‌లోడ్ చేయండి',
+        'Or Paste Document Text': 'లేదా పత్రం వచనాన్ని అతికించండి',
+        'Upload File': 'ఫైల్‌ను అప్‌లోడ్ చేయండి',
+        'Audit Document': 'పత్రాన్ని ఆడిట్ చేయండి'
+    }
+};
+
+window.applyTranslations = function(langCode) {
+    if (langCode === 'en') {
+        // Simple reload to reset to English for now
+        // A more robust app would store original English strings
+        const currentHash = window.location.hash.replace('#/', '') || 'home';
+        navigateTo(currentHash);
+        return;
+    }
+
+    const dict = translations[langCode];
+    if (!dict) return;
+
+    // Translate navigation elements
+    document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(el => {
+        const text = el.innerText.trim();
+        if (dict[text]) {
+            el.innerText = dict[text];
+            el.dataset.originalText = text; // store for reverting
+        } else if (el.dataset.originalText && dict[el.dataset.originalText]) {
+             el.innerText = dict[el.dataset.originalText];
+        }
+    });
+
+    // Translate marked content elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (dict[key]) {
+            // Keep inner icons if they exist by replacing only text nodes
+            // For simplicity in this mock, we'll just replace textContext if no HTML inside,
+            // or replace specific strings.
+
+            if(el.children.length === 0) {
+                 el.innerText = dict[key];
+            } else {
+                // If it has children (like icons), it's trickier.
+                // Let's assume we replace the last text node.
+                for (let i = 0; i < el.childNodes.length; i++) {
+                    const node = el.childNodes[i];
+                    if (node.nodeType === 3 && node.nodeValue.trim() !== '') {
+                        // Check if the trimmed text matches a key or original text
+                        let nodeText = node.nodeValue.trim();
+                        if (nodeText === key) {
+                             node.nodeValue = " " + dict[key] + " ";
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Update the global language switcher listener
+document.addEventListener('DOMContentLoaded', () => {
+    const langSelects = [document.getElementById('language-switcher'), document.getElementById('mobile-language-switcher')];
+
+    // Remove old listeners to avoid duplicates
+    // In a real app we'd manage this cleaner, but we'll just overwrite logic here by fetching elements again
+
+    langSelects.forEach(select => {
+        if(select) {
+            // Overwrite onchange instead of addEventListener to clear previous
+            select.onchange = (e) => {
+                const newLang = e.target.value;
+                globalState.currentLanguage = newLang;
+
+                langSelects.forEach(s => { if(s && s !== e.target) s.value = newLang; });
+
+                console.log(`Language switched to: ${newLang}`);
+                applyTranslations(newLang);
+
+                // Re-render current page to apply translations cleanly
+                // Note: Re-rendering wipes out state like typed text in the textarea,
+                // but it's acceptable for this simple implementation.
+                // const currentHash = window.location.hash.replace('#/', '') || 'home';
+                // navigateTo(currentHash);
+            };
+        }
+    });
+});
+
+
+// Make sure initial state shows English correctly when navigating
+const originalNavigateToTranslate = window.navigateTo;
+window.navigateTo = function(pageId) {
+    originalNavigateToTranslate(pageId);
+    if(globalState.currentLanguage !== 'en') {
+        setTimeout(() => applyTranslations(globalState.currentLanguage), 50);
+    }
+}
+
+// Fix the English translation bug found in code review
+window.applyTranslations = function(langCode) {
+    if (langCode === 'en') {
+        // Revert navigation elements
+        document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(el => {
+            if (el.dataset.originalText) {
+                el.innerText = el.dataset.originalText;
+            }
+        });
+
+        // Revert marked content elements by removing the added translation
+        // For a full app, you would want to store original text in a data attribute
+        // just like the nav, but for now we can just reload the route cleanly since
+        // the template strings have English by default.
+        const currentHash = window.location.hash.replace('#/', '') || 'home';
+        navigateTo(currentHash);
+        return;
+    }
+
+    const dict = translations[langCode];
+    if (!dict) return;
+
+    // Translate navigation elements
+    document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(el => {
+        const text = el.innerText.trim();
+        if (dict[text]) {
+            if(!el.dataset.originalText) el.dataset.originalText = text; // store for reverting
+            el.innerText = dict[text];
+        } else if (el.dataset.originalText && dict[el.dataset.originalText]) {
+             el.innerText = dict[el.dataset.originalText];
+        }
+    });
+
+    // Translate marked content elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (dict[key]) {
+            if(el.children.length === 0) {
+                 el.innerText = dict[key];
+            } else {
+                for (let i = 0; i < el.childNodes.length; i++) {
+                    const node = el.childNodes[i];
+                    if (node.nodeType === 3 && node.nodeValue.trim() !== '') {
+                        let nodeText = node.nodeValue.trim();
+                        if (nodeText === key) {
+                             node.nodeValue = " " + dict[key] + " ";
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
