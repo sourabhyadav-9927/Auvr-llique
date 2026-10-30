@@ -1,315 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f8f5ef">
-  <meta name="description" content="Discover luxury hair styling, personalized beauty services and an elevated salon experience at Auvréllique in Navi Mumbai. Book your appointment today.">
-  <title>Auvréllique | Luxury Hair & Beauty Studio</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurix - AI Citizen Legal Assistant</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            900: '#162456',
+                            800: '#1E316D',
+                            700: '#2D458B'
+                        },
+                        orange: {
+                            500: '#E67E22'
+                        },
+                        gold: {
+                            500: '#F39C12'
+                        },
+                        canvas: '#F8FAFC',
+                        callout: {
+                            bg: '#FEF3E2',
+                            border: '#FBD38D'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Tesseract.js for browser OCR -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 </head>
-<body>
+<body class="bg-canvas text-gray-800 font-sans min-h-screen flex flex-col">
 
-  <div class="announcement">
-    A LITTLE LUXURY, JUST FOR YOU
-    <span>—</span>
-    Discover your signature style
-  </div>
+    <!-- Top Navigation Bar -->
+    <nav class="bg-navy-900 text-white sticky top-0 z-50 print:hidden shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold tracking-tight text-white mr-2"><i class="fa-solid fa-scale-balanced text-orange-500 mr-2"></i>Jurix</span>
+                    <span class="hidden md:inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-navy-800 text-orange-500 border border-navy-700">
+                        TEAM BLACK MOON • CITIZEN EMPOWERMENT
+                    </span>
+                </div>
 
-  <header class="site-header">
-    <nav class="navbar container" aria-label="Main navigation">
-      <a href="index.html" class="brand" aria-label="Auvréllique home">
-        <span class="brand-name">Auvréllique</span>
-        <span class="brand-subtitle">ÉLÉGANCE</span>
-      </a>
+                <div class="hidden md:flex items-center space-x-4">
+                    <!-- Global Language Switcher -->
+                    <div class="relative">
+                        <select id="language-switcher" class="bg-navy-800 text-white text-sm rounded border border-navy-700 focus:ring-orange-500 focus:border-orange-500 block p-1.5 cursor-pointer appearance-none pr-8">
+                            <option value="en">English</option>
+                            <option value="hi">हिन्दी (Hindi)</option>
+                            <option value="mr">मराठी (Marathi)</option>
+                            <option value="ta">தமிழ் (Tamil)</option>
+                            <option value="te">తెలుగు (Telugu)</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </div>
+                    </div>
 
-      <button class="menu-toggle" aria-label="Open navigation"
-        aria-expanded="false" aria-controls="nav-links">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+                    <a href="#/home" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-orange-500 transition-colors" data-page="home">Home</a>
+                    <a href="#/auditor" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-orange-500 transition-colors" data-page="auditor">Contract Auditor</a>
+                    <a href="#/bail-tracker" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-orange-500 transition-colors" data-page="bail-tracker">Bail Tracker</a>
+                    <a href="#/legal-brief" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-orange-500 transition-colors" data-page="legal-brief">Legal Aid Brief</a>
+                    <a href="#/impact-team" class="nav-link px-3 py-2 rounded-md text-sm font-medium hover:text-orange-500 transition-colors" data-page="impact-team">Impact & Team</a>
+                </div>
 
-      <div class="nav-links" id="nav-links">
-        <a class="active" href="index.html">Home</a>
-        <a href="about.html">Our Story</a>
-        <a href="services.html">Services</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="contact.html">Contact</a>
-        <a class="nav-book" href="booking.html">Book a Visit <span>↗</span></a>
-      </div>
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-navy-800 focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-navy-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                 <select id="mobile-language-switcher" class="w-full bg-navy-900 text-white text-sm rounded border border-navy-700 p-2 mb-2">
+                    <option value="en">English</option>
+                    <option value="hi">हिन्दी (Hindi)</option>
+                    <option value="mr">मराठी (Marathi)</option>
+                    <option value="ta">தமிழ் (Tamil)</option>
+                    <option value="te">తెలుగు (Telugu)</option>
+                </select>
+                <a href="#/home" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-orange-500" data-page="home">Home</a>
+                <a href="#/auditor" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-orange-500" data-page="auditor">Contract Auditor</a>
+                <a href="#/bail-tracker" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-orange-500" data-page="bail-tracker">Bail Tracker</a>
+                <a href="#/legal-brief" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-orange-500" data-page="legal-brief">Legal Aid Brief</a>
+                <a href="#/impact-team" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium hover:text-orange-500" data-page="impact-team">Impact & Team</a>
+            </div>
+        </div>
     </nav>
-  </header>
 
-  <main>
-    <!-- HERO SECTION -->
-    <section class="hero">
-      <div class="hero-content">
-        <p class="eyebrow"><span></span> YOUR MOMENT OF BEAUTY <span></span></p>
+    <!-- Main Content Area -->
+    <main id="app-container" class="flex-grow w-full relative">
+        <!-- Pages will be injected here -->
+    </main>
 
-        <h1>Beauty is an art.<br>Make it <em>yours.</em></h1>
-
-        <p class="hero-description">
-          Discover a more beautiful you with thoughtful styling,
-          personalized care, and a little everyday luxury.
-        </p>
-
-        <div class="hero-actions">
-          <a href="booking.html" class="button button-dark">
-            Reserve Your Experience <span>↗</span>
-          </a>
-          <a href="services.html" class="text-link">
-            Explore Our Services <span>→</span>
-          </a>
-        </div>
-
-        <div class="hero-note">
-          <span class="note-star">✳</span>
-          <div>
-            <strong>Your beauty, our passion.</strong>
-            <p>Personalized care in every detail.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- HERO SLIDER -->
-      <div class="hero-visual" id="hero-slider" aria-roledescription="carousel" aria-label="Auvréllique Highlights">
-        <div class="hero-slides">
-          <!-- Slide 01 -->
-          <div class="hero-slide active" data-index="01" data-caption="THE BEAUTY EXPERIENCE">
-            <img
-              src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=85"
-              alt="Elegant modern salon interior"
-              fetchpriority="high">
-          </div>
-
-          <!-- Slide 02 -->
-          <div class="hero-slide" data-index="02" data-caption="HAIR ARCHITECTURE & COLOR">
-            <img
-              src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=85"
-              alt="Bespoke haircut and styling artistry"
-              loading="lazy">
-          </div>
-
-          <!-- Slide 03 -->
-          <div class="hero-slide" data-index="03" data-caption="COUTURE BEAUTY & GLAM">
-            <img
-              src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=1200&q=85"
-              alt="Radiant bridal makeup and skincare"
-              loading="lazy">
-          </div>
-        </div>
-
-        <div class="hero-stamp">
-          <span>THE ART OF</span>
-          <strong>FEELING<br>BEAUTIFUL</strong>
-          <span>EST. WITH LOVE</span>
-        </div>
-
-        <!-- Slider Controls -->
-        <div class="slider-controls">
-          <button class="slider-arrow slider-prev" aria-label="Previous slide" type="button">‹</button>
-          <button class="slider-arrow slider-next" aria-label="Next slide" type="button">›</button>
-        </div>
-
-        <div class="image-caption">
-          <span class="slide-counter">01 / 03</span>
-          <span class="slide-title">THE BEAUTY EXPERIENCE</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- BRAND INTRODUCTION -->
-    <section class="intro section-padding">
-      <div class="container intro-grid">
-        <div>
-          <p class="eyebrow">WELCOME TO Auvréllique</p>
-          <h2>A space to unwind.<br>A style to <em>remember.</em></h2>
-        </div>
-
-        <div class="intro-copy">
-          <p>
-            We believe beauty is personal. Every visit is an opportunity
-            to slow down, feel cared for, and leave with a look that
-            feels entirely your own.
-          </p>
-          <a class="text-link" href="about.html">
-            Get to Know Us <span>→</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section class="services-section section-padding">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">THE Auvréllique EXPERIENCE</p>
-            <h2>Little rituals.<br><em>Beautiful results.</em></h2>
-          </div>
-          <a href="services.html" class="text-link">
-            View All Services <span>→</span>
-          </a>
-        </div>
-
-        <div class="service-grid">
-          <article class="service-card">
-            <a href="services.html" class="service-image">
-              <img
-                src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=85"
-                alt="Professional hair styling">
-              <span class="service-number">01</span>
-            </a>
-            <div class="service-info">
-              <div>
-                <h3>Hair & Styling</h3>
-                <p>Everyday elegance, made effortless.</p>
-              </div>
-              <a href="services.html" aria-label="Explore hair and styling services">↗</a>
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-gray-300 py-8 print:hidden border-t border-navy-700 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0 text-center md:text-left">
+                <span class="text-xl font-bold text-white"><i class="fa-solid fa-scale-balanced text-orange-500 mr-2"></i>Jurix</span>
+                <p class="text-sm mt-1">AI-powered citizen legal assistant & predictive case-risk analyzer.</p>
             </div>
-          </article>
-
-          <article class="service-card">
-            <a href="services.html" class="service-image">
-              <img
-                src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=85"
-                alt="Professional beauty and makeup look">
-              <span class="service-number">02</span>
-            </a>
-            <div class="service-info">
-              <div>
-                <h3>Makeup & Beauty</h3>
-                <p>Soft glam or your own statement look.</p>
-              </div>
-              <a href="services.html" aria-label="Explore makeup and beauty services">↗</a>
+            <div class="flex space-x-4 md:space-x-6 text-sm text-center">
+                <span>Built by TEAM BLACK MOON</span>
+                <span class="hidden md:inline">•</span>
+                <span>100% Client-Side Privacy</span>
             </div>
-          </article>
-
-          <article class="service-card">
-            <a href="services.html" class="service-image">
-              <img
-                src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=800&q=85"
-                alt="Relaxing hair care and salon treatment">
-              <span class="service-number">03</span>
-            </a>
-            <div class="service-info">
-              <div>
-                <h3>Care & Treatments</h3>
-                <p>A little care goes a beautiful way.</p>
-              </div>
-              <a href="services.html" aria-label="Explore care and treatments">↗</a>
-            </div>
-          </article>
         </div>
-      </div>
-    </section>
+    </footer>
 
-    <!-- FEATURED GALLERY -->
-    <section class="gallery-section section-padding">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">A GLIMPSE OF BEAUTY</p>
-            <h2>Looks we <em>love.</em></h2>
-          </div>
-          <a href="gallery.html" class="text-link">
-            Explore the Gallery <span>→</span>
-          </a>
-        </div>
-
-        <div class="gallery-grid">
-          <a class="gallery-item gallery-tall" href="gallery.html">
-            <img
-              src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=900&q=85"
-              alt="Beauty editorial portrait">
-            <span>Effortless beauty ↗</span>
-          </a>
-
-          <a class="gallery-item" href="gallery.html">
-            <img
-              src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=800&q=85"
-              alt="Elegant hairstyle inspiration">
-            <span>Signature styling ↗</span>
-          </a>
-
-          <a class="gallery-item" href="gallery.html">
-            <img
-              src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=85"
-              alt="Modern fashion and beauty inspiration">
-            <span>Your next look ↗</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- BOOKING CALL TO ACTION -->
-    <section class="booking-banner">
-      <div class="booking-banner-content">
-        <p class="eyebrow">YOUR TIME. YOUR BEAUTY.</p>
-        <h2>You deserve a little<br><em>something beautiful.</em></h2>
-        <p>Take a moment for yourself. We'd love to welcome you.</p>
-        <a href="booking.html" class="button button-light">
-          Book Your Appointment <span>↗</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- FOOTER NOTE -->
-    <section class="newsletter-note">
-      <p>GOOD HAIR. GOOD ENERGY. GREAT DAYS.</p>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-main">
-      <div class="footer-brand">
-        <a href="index.html" class="brand">
-          <span class="brand-name">Auvréllique</span>
-          <span class="brand-subtitle">ÉLÉGANCE</span>
-        </a>
-        <p>Beauty in every detail.<br>Confidence in every moment.</p>
-      </div>
-
-      <div class="footer-column">
-        <h3>Explore</h3>
-        <a href="about.html">Our Story</a>
-        <a href="services.html">Services</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="booking.html">Book an Appointment</a>
-      </div>
-
-      <div class="footer-column">
-        <h3>Visit Us</h3>
-        <p>Navi Mumbai, Maharashtra</p>
-        <p>Mon – Sat · 10 AM – 8 PM</p>
-        <a href="contact.html">Contact & Directions ↗</a>
-      </div>
-
-      <div class="footer-column">
-        <h3>Let's Connect</h3>
-        <p>Have a look in mind? Let's talk.</p>
-        <a href="#" data-whatsapp>Chat on WhatsApp ↗</a>
-        <a href="booking.html">Plan Your Visit ↗</a>
-      </div>
-    </div>
-
-    <div class="container footer-bottom">
-      <p>© <span id="current-year"></span> Auvréllique. All rights reserved.</p>
-      <p>Made with care & a touch of elegance.</p>
-    </div>
-  </footer>
-
-  <a href="#" class="whatsapp-float" data-whatsapp
-    aria-label="Chat with us on WhatsApp">
-    <span>WhatsApp ↗</span>
-  </a>
-
+    <!-- App Scripts -->
+    <script src="app.js"></script>
 </body>
 </html>
