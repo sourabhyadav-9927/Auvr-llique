@@ -3,313 +3,225 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f8f5ef">
-  <meta name="description" content="Discover luxury hair styling, personalized beauty services and an elevated salon experience at Auvréllique in Navi Mumbai. Book your appointment today.">
-  <title>Auvréllique | Luxury Hair & Beauty Studio</title>
+  <meta name="description" content="AuraLearn 3D - Next-Gen Interactive EdTech Web Application with 3D Transforms, Real-time Bilingual Mastery, and Mock FastAPI Quiz Generation.">
+  <title>AuraLearn 3D | Next-Gen AI EdTech Platform</title>
 
+  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/i18n.js"></script>
+  <script src="js/mock-api.js"></script>
+  <script src="js/tilt.js"></script>
 </head>
 <body>
-
-  <div class="announcement">
-    A LITTLE LUXURY, JUST FOR YOU
-    <span>—</span>
-    Discover your signature style
-  </div>
-
-  <header class="site-header">
-    <nav class="navbar container" aria-label="Main navigation">
-      <a href="index.html" class="brand" aria-label="Auvréllique home">
-        <span class="brand-name">Auvréllique</span>
-        <span class="brand-subtitle">ÉLÉGANCE</span>
+  <div class="app-container">
+    <!-- Navigation Bar -->
+    <header class="navbar">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">⚡</div>
+        <span data-i18n="brand_title">AuraLearn 3D</span>
       </a>
 
-      <button class="menu-toggle" aria-label="Open navigation"
-        aria-expanded="false" aria-controls="nav-links">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <div class="nav-links" id="nav-links">
-        <a class="active" href="index.html">Home</a>
-        <a href="about.html">Our Story</a>
-        <a href="services.html">Services</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="contact.html">Contact</a>
-        <a class="nav-book" href="booking.html">Book a Visit <span>↗</span></a>
+      <div class="nav-actions">
+        <!-- Prominent Language Toggle Switch -->
+        <div class="lang-toggle-wrapper" role="radiogroup" aria-label="Language Selector">
+          <button type="button" class="lang-btn active" data-lang="en" aria-label="Switch to English">
+            <span>🇬🇧</span>
+            <span data-i18n="lang_en">EN</span>
+          </button>
+          <button type="button" class="lang-btn" data-lang="hi" aria-label="Switch to Hindi">
+            <span>🇮🇳</span>
+            <span data-i18n="lang_hi">हिंदी</span>
+          </button>
+        </div>
       </div>
-    </nav>
-  </header>
+    </header>
 
-  <main>
-    <!-- HERO SECTION -->
-    <section class="hero">
-      <div class="hero-content">
-        <p class="eyebrow"><span></span> YOUR MOMENT OF BEAUTY <span></span></p>
+    <!-- Main Hero & Setup Section -->
+    <main class="hero-section perspective-container">
+      <!-- 3D Hero Description -->
+      <section class="hero-content">
+        <div class="badge-tag">
+          <span data-i18n="hero_badge">✨ Next-Gen AI EdTech Platform</span>
+        </div>
 
-        <h1>Beauty is an art.<br>Make it <em>yours.</em></h1>
+        <h1 class="hero-title">
+          <span data-i18n="hero_heading_1">Master Any Topic with</span><br>
+          <span class="gradient-text" data-i18n="hero_heading_2">Interactive 3D Quizzes</span>
+        </h1>
 
-        <p class="hero-description">
-          Discover a more beautiful you with thoughtful styling,
-          personalized care, and a little everyday luxury.
+        <p class="hero-subtitle" data-i18n="hero_subtitle">
+          Experience adaptive multi-sensory learning powered by 3D spatial transformations, real-time mastery analytics, and instant bilingual explanations.
         </p>
 
-        <div class="hero-actions">
-          <a href="booking.html" class="button button-dark">
-            Reserve Your Experience <span>↗</span>
-          </a>
-          <a href="services.html" class="text-link">
-            Explore Our Services <span>→</span>
-          </a>
+        <div class="hero-features">
+          <div class="feature-pill">
+            <span class="feature-icon">🎲</span>
+            <span data-i18n="feature_1">Spatial 3D Cards</span>
+          </div>
+          <div class="feature-pill">
+            <span class="feature-icon">🔍</span>
+            <span data-i18n="feature_2">Instant Detailed Analysis</span>
+          </div>
+          <div class="feature-pill">
+            <span class="feature-icon">📊</span>
+            <span data-i18n="feature_3">Mastery Tracking</span>
+          </div>
         </div>
+      </section>
 
-        <div class="hero-note">
-          <span class="note-star">✳</span>
-          <div>
-            <strong>Your beauty, our passion.</strong>
-            <p>Personalized care in every detail.</p>
+      <!-- Quiz Setup 3D Glassmorphic Form Card -->
+      <div class="setup-card-wrapper perspective-container">
+        <div class="glass-card setup-card tilt-card" id="setupCard">
+          <div class="tilt-inner-floating">
+            <div class="setup-header">
+              <h2 class="setup-title" data-i18n="setup_title">Generate Your Quiz</h2>
+              <p class="setup-desc" data-i18n="setup_subtitle">Choose your subject & challenge depth to begin</p>
+            </div>
+
+            <form id="quizSetupForm" autocomplete="off">
+              <!-- Topic Input -->
+              <div class="form-group">
+                <label for="topicInput" class="form-label" data-i18n="topic_label">Topic / Subject</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">💡</span>
+                  <input
+                    type="text"
+                    id="topicInput"
+                    class="form-input"
+                    data-i18n-placeholder="topic_placeholder"
+                    placeholder="e.g., Quantum Physics, World History, Python..."
+                    value="Quantum Physics"
+                    required
+                  >
+                </div>
+
+                <!-- Topic Quick Presets -->
+                <div class="topic-presets">
+                  <button type="button" class="preset-chip active" data-preset="Quantum Physics" data-i18n="preset_quantum">Quantum Physics</button>
+                  <button type="button" class="preset-chip" data-preset="Artificial Intelligence" data-i18n="preset_ai">Artificial Intelligence</button>
+                  <button type="button" class="preset-chip" data-preset="Ancient Civilizations" data-i18n="preset_history">Ancient Civilizations</button>
+                  <button type="button" class="preset-chip" data-preset="Space Exploration" data-i18n="preset_space">Space Exploration</button>
+                </div>
+              </div>
+
+              <!-- Question Count Select -->
+              <div class="form-group">
+                <label for="countSelect" class="form-label" data-i18n="count_label">Number of Questions</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">🎯</span>
+                  <select id="countSelect" class="form-select">
+                    <option value="3" data-i18n="count_3">3 Questions (Quick Sprint)</option>
+                    <option value="5" selected data-i18n="count_5">5 Questions (Standard Mastery)</option>
+                    <option value="10" data-i18n="count_10">10 Questions (Deep Dive)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Submit CTA Button -->
+              <button type="submit" id="submitBtn" class="btn-primary-3d">
+                <span data-i18n="btn_generate">Generate 3D Quiz</span>
+                <span class="btn-arrow">➔</span>
+              </button>
+            </form>
           </div>
         </div>
       </div>
+    </main>
 
-      <!-- HERO SLIDER -->
-      <div class="hero-visual" id="hero-slider" aria-roledescription="carousel" aria-label="Auvréllique Highlights">
-        <div class="hero-slides">
-          <!-- Slide 01 -->
-          <div class="hero-slide active" data-index="01" data-caption="THE BEAUTY EXPERIENCE">
-            <img
-              src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=85"
-              alt="Elegant modern salon interior"
-              fetchpriority="high">
-          </div>
-
-          <!-- Slide 02 -->
-          <div class="hero-slide" data-index="02" data-caption="HAIR ARCHITECTURE & COLOR">
-            <img
-              src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=85"
-              alt="Bespoke haircut and styling artistry"
-              loading="lazy">
-          </div>
-
-          <!-- Slide 03 -->
-          <div class="hero-slide" data-index="03" data-caption="COUTURE BEAUTY & GLAM">
-            <img
-              src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=1200&q=85"
-              alt="Radiant bridal makeup and skincare"
-              loading="lazy">
-          </div>
+    <!-- 3D Spinning Loader Overlay -->
+    <div id="loaderOverlay" class="loader-overlay" aria-hidden="true" role="dialog">
+      <div class="loader-container">
+        <!-- 3D Geometric Cube Spinner -->
+        <div class="spinner-3d-box">
+          <div class="cube-face face-front"></div>
+          <div class="cube-face face-back"></div>
+          <div class="cube-face face-right"></div>
+          <div class="cube-face face-left"></div>
+          <div class="cube-face face-top"></div>
+          <div class="cube-face face-bottom"></div>
         </div>
 
-        <div class="hero-stamp">
-          <span>THE ART OF</span>
-          <strong>FEELING<br>BEAUTIFUL</strong>
-          <span>EST. WITH LOVE</span>
-        </div>
-
-        <!-- Slider Controls -->
-        <div class="slider-controls">
-          <button class="slider-arrow slider-prev" aria-label="Previous slide" type="button">‹</button>
-          <button class="slider-arrow slider-next" aria-label="Next slide" type="button">›</button>
-        </div>
-
-        <div class="image-caption">
-          <span class="slide-counter">01 / 03</span>
-          <span class="slide-title">THE BEAUTY EXPERIENCE</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- BRAND INTRODUCTION -->
-    <section class="intro section-padding">
-      <div class="container intro-grid">
         <div>
-          <p class="eyebrow">WELCOME TO Auvréllique</p>
-          <h2>A space to unwind.<br>A style to <em>remember.</em></h2>
+          <h3 class="loader-text" data-i18n="loader_title">Synthesizing Interactive Quiz...</h3>
+          <p class="loader-subtext" data-i18n="loader_subtitle">Generating adaptive questions, 3D assets & bilingual feedback</p>
         </div>
-
-        <div class="intro-copy">
-          <p>
-            We believe beauty is personal. Every visit is an opportunity
-            to slow down, feel cared for, and leave with a look that
-            feels entirely your own.
-          </p>
-          <a class="text-link" href="about.html">
-            Get to Know Us <span>→</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section class="services-section section-padding">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">THE Auvréllique EXPERIENCE</p>
-            <h2>Little rituals.<br><em>Beautiful results.</em></h2>
-          </div>
-          <a href="services.html" class="text-link">
-            View All Services <span>→</span>
-          </a>
-        </div>
-
-        <div class="service-grid">
-          <article class="service-card">
-            <a href="services.html" class="service-image">
-              <img
-                src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=85"
-                alt="Professional hair styling">
-              <span class="service-number">01</span>
-            </a>
-            <div class="service-info">
-              <div>
-                <h3>Hair & Styling</h3>
-                <p>Everyday elegance, made effortless.</p>
-              </div>
-              <a href="services.html" aria-label="Explore hair and styling services">↗</a>
-            </div>
-          </article>
-
-          <article class="service-card">
-            <a href="services.html" class="service-image">
-              <img
-                src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=85"
-                alt="Professional beauty and makeup look">
-              <span class="service-number">02</span>
-            </a>
-            <div class="service-info">
-              <div>
-                <h3>Makeup & Beauty</h3>
-                <p>Soft glam or your own statement look.</p>
-              </div>
-              <a href="services.html" aria-label="Explore makeup and beauty services">↗</a>
-            </div>
-          </article>
-
-          <article class="service-card">
-            <a href="services.html" class="service-image">
-              <img
-                src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=800&q=85"
-                alt="Relaxing hair care and salon treatment">
-              <span class="service-number">03</span>
-            </a>
-            <div class="service-info">
-              <div>
-                <h3>Care & Treatments</h3>
-                <p>A little care goes a beautiful way.</p>
-              </div>
-              <a href="services.html" aria-label="Explore care and treatments">↗</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURED GALLERY -->
-    <section class="gallery-section section-padding">
-      <div class="container">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">A GLIMPSE OF BEAUTY</p>
-            <h2>Looks we <em>love.</em></h2>
-          </div>
-          <a href="gallery.html" class="text-link">
-            Explore the Gallery <span>→</span>
-          </a>
-        </div>
-
-        <div class="gallery-grid">
-          <a class="gallery-item gallery-tall" href="gallery.html">
-            <img
-              src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=900&q=85"
-              alt="Beauty editorial portrait">
-            <span>Effortless beauty ↗</span>
-          </a>
-
-          <a class="gallery-item" href="gallery.html">
-            <img
-              src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=800&q=85"
-              alt="Elegant hairstyle inspiration">
-            <span>Signature styling ↗</span>
-          </a>
-
-          <a class="gallery-item" href="gallery.html">
-            <img
-              src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=85"
-              alt="Modern fashion and beauty inspiration">
-            <span>Your next look ↗</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- BOOKING CALL TO ACTION -->
-    <section class="booking-banner">
-      <div class="booking-banner-content">
-        <p class="eyebrow">YOUR TIME. YOUR BEAUTY.</p>
-        <h2>You deserve a little<br><em>something beautiful.</em></h2>
-        <p>Take a moment for yourself. We'd love to welcome you.</p>
-        <a href="booking.html" class="button button-light">
-          Book Your Appointment <span>↗</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- FOOTER NOTE -->
-    <section class="newsletter-note">
-      <p>GOOD HAIR. GOOD ENERGY. GREAT DAYS.</p>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-main">
-      <div class="footer-brand">
-        <a href="index.html" class="brand">
-          <span class="brand-name">Auvréllique</span>
-          <span class="brand-subtitle">ÉLÉGANCE</span>
-        </a>
-        <p>Beauty in every detail.<br>Confidence in every moment.</p>
-      </div>
-
-      <div class="footer-column">
-        <h3>Explore</h3>
-        <a href="about.html">Our Story</a>
-        <a href="services.html">Services</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="booking.html">Book an Appointment</a>
-      </div>
-
-      <div class="footer-column">
-        <h3>Visit Us</h3>
-        <p>Navi Mumbai, Maharashtra</p>
-        <p>Mon – Sat · 10 AM – 8 PM</p>
-        <a href="contact.html">Contact & Directions ↗</a>
-      </div>
-
-      <div class="footer-column">
-        <h3>Let's Connect</h3>
-        <p>Have a look in mind? Let's talk.</p>
-        <a href="#" data-whatsapp>Chat on WhatsApp ↗</a>
-        <a href="booking.html">Plan Your Visit ↗</a>
       </div>
     </div>
 
-    <div class="container footer-bottom">
-      <p>© <span id="current-year"></span> Auvréllique. All rights reserved.</p>
-      <p>Made with care & a touch of elegance.</p>
-    </div>
-  </footer>
+    <!-- Footer -->
+    <footer class="footer">
+      <p data-i18n="footer_text">© 2025 AuraLearn 3D EdTech. Interactive immersive learning platform.</p>
+    </footer>
+  </div>
 
-  <a href="#" class="whatsapp-float" data-whatsapp
-    aria-label="Chat with us on WhatsApp">
-    <span>WhatsApp ↗</span>
-  </a>
+  <script>
+    // Setup page logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('quizSetupForm');
+      const topicInput = document.getElementById('topicInput');
+      const countSelect = document.getElementById('countSelect');
+      const loaderOverlay = document.getElementById('loaderOverlay');
+      const presetChips = document.querySelectorAll('.preset-chip');
 
+      // Preset click handler
+      presetChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          presetChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          topicInput.value = chip.getAttribute('data-preset');
+          topicInput.focus();
+        });
+      });
+
+      // Form submission
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const topic = topicInput.value.trim() || 'Quantum Physics';
+        const count = parseInt(countSelect.value, 10) || 5;
+
+        // Show 3D spinning loader
+        loaderOverlay.classList.add('active');
+        loaderOverlay.setAttribute('aria-hidden', 'false');
+
+        try {
+          // Send Fetch POST request to FastAPI endpoint /generate-quiz
+          const response = await fetch('/generate-quiz', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              topic: topic,
+              count: count
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error(`Server returned status: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          // Store quiz data in localStorage
+          localStorage.setItem('aura_active_quiz', JSON.stringify(data));
+          // Reset previous quiz session responses
+          localStorage.removeItem('aura_quiz_results');
+
+          // Navigate to quiz view
+          window.location.href = 'quiz.html';
+        } catch (error) {
+          console.error("Quiz generation failed:", error);
+          alert("Error generating quiz. Please try again.");
+          loaderOverlay.classList.remove('active');
+          loaderOverlay.setAttribute('aria-hidden', 'true');
+        }
+      });
+    });
+  </script>
 </body>
 </html>

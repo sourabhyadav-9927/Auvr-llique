@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AuraLearn 3D Active MCQ Player - 3D Flip Cards, Tactile Feedback & Instant Explanation">
+  <title>Active Quiz | AuraLearn 3D</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/i18n.js"></script>
+  <script src="js/tilt.js"></script>
+  <script src="js/quiz.js" defer></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Navigation Bar -->
+    <header class="navbar">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">⚡</div>
+        <span data-i18n="brand_title">AuraLearn 3D</span>
+      </a>
+
+      <div class="nav-actions">
+        <!-- Prominent Language Toggle Switch -->
+        <div class="lang-toggle-wrapper" role="radiogroup" aria-label="Language Selector">
+          <button type="button" class="lang-btn active" data-lang="en" aria-label="Switch to English">
+            <span>🇬🇧</span>
+            <span data-i18n="lang_en">EN</span>
+          </button>
+          <button type="button" class="lang-btn" data-lang="hi" aria-label="Switch to Hindi">
+            <span>🇮🇳</span>
+            <span data-i18n="lang_hi">हिंदी</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Quiz Wrapper -->
+    <main class="quiz-wrapper">
+      <!-- Quiz Header Status & Progress -->
+      <section class="quiz-header">
+        <div class="quiz-topic-badge">
+          <span>📚</span>
+          <span id="quizTopicBadge">Loading Topic...</span>
+        </div>
+        <div class="quiz-progress-text" id="quizProgressText">
+          Question 1 of 5
+        </div>
+      </section>
+
+      <!-- Progress Track -->
+      <div class="progress-track" role="progressbar" aria-label="Quiz Progress">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+
+      <!-- 3D Flip Card Container Stage -->
+      <div class="flip-card-stage">
+        <div class="flip-card-inner tilt-card" id="flipCard">
+
+          <!-- Front Face: Question & Options -->
+          <div class="flip-face front">
+            <div>
+              <div class="question-badge" id="qBadge">Question 1</div>
+              <h2 class="question-text" id="questionText">Loading interactive question...</h2>
+            </div>
+
+            <!-- Interactive MCQ Options -->
+            <div class="options-grid" id="optionsGrid" role="group" aria-label="Answer Choices">
+              <!-- Dynamically populated via quiz.js -->
+            </div>
+
+            <div style="text-align: center; color: var(--text-dim); font-size: 0.85rem;" data-i18n="btn_flip_hint">
+              Select an option to reveal the 3D explanation
+            </div>
+          </div>
+
+          <!-- Back Face: 3D Explanation & Correct Answer -->
+          <div class="flip-face back">
+            <div class="back-status-header">
+              <div class="status-badge correct" id="statusBadge">
+                <span>✓</span>
+                <span data-i18n="status_correct">Correct Answer!</span>
+              </div>
+            </div>
+
+            <!-- Detailed Concept Breakdown Box -->
+            <div class="explanation-box">
+              <div class="explanation-title">
+                <span>💡</span>
+                <span data-i18n="explanation_title">Detailed Concept Breakdown</span>
+              </div>
+              <p class="explanation-body" id="explanationText">
+                Analyzing core principles...
+              </p>
+            </div>
+
+            <!-- Action Footer -->
+            <div class="back-action-footer">
+              <button type="button" id="nextBtn" class="btn-primary-3d btn-next">
+                <span data-i18n="btn_next_question">Next Question →</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p data-i18n="footer_text">© 2025 AuraLearn 3D EdTech. Interactive immersive learning platform.</p>
+    </footer>
+  </div>
+</body>
+</html>
