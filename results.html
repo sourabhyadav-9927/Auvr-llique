@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AuraLearn 3D - Score & Mastery Breakdown with Animated SVG Progress and Structured Question Review">
+  <title>Quiz Results & Mastery | AuraLearn 3D</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/i18n.js"></script>
+  <script src="js/tilt.js"></script>
+  <script src="js/results.js" defer></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Navigation Bar -->
+    <header class="navbar">
+      <a href="index.html" class="brand-link">
+        <div class="brand-icon">⚡</div>
+        <span data-i18n="brand_title">AuraLearn 3D</span>
+      </a>
+
+      <div class="nav-actions">
+        <!-- Prominent Language Toggle Switch -->
+        <div class="lang-toggle-wrapper" role="radiogroup" aria-label="Language Selector">
+          <button type="button" class="lang-btn active" data-lang="en" aria-label="Switch to English">
+            <span>🇬🇧</span>
+            <span data-i18n="lang_en">EN</span>
+          </button>
+          <button type="button" class="lang-btn" data-lang="hi" aria-label="Switch to Hindi">
+            <span>🇮🇳</span>
+            <span data-i18n="lang_hi">हिंदी</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Results Main Container -->
+    <main class="results-wrapper perspective-container">
+      <!-- Hero Results Grid -->
+      <div class="results-hero-grid">
+
+        <!-- Animated SVG Circular Progress Card -->
+        <div class="glass-card circle-chart-card tilt-card">
+          <div class="tilt-inner-floating">
+            <div class="svg-circle-wrap">
+              <svg viewBox="0 0 36 36" class="circular-chart">
+                <defs>
+                  <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#6366f1" />
+                    <stop offset="50%" stop-color="#8b5cf6" />
+                    <stop offset="100%" stop-color="#ec4899" />
+                  </linearGradient>
+                </defs>
+                <path class="circle-bg"
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                />
+                <path id="svgCircleProgress" class="circle-progress"
+                  stroke-dasharray="0, 100"
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                />
+              </svg>
+              <div class="circle-text-center">
+                <span class="percentage-val" id="percentageVal">0%</span>
+                <span class="percentage-label" data-i18n="score_percentage_label">Score</span>
+              </div>
+            </div>
+
+            <div class="mastery-badge" id="masteryBadge">
+              Mastery: Evaluating...
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance Summary Card -->
+        <div class="glass-card stats-summary-card tilt-card">
+          <div class="tilt-inner-floating">
+            <div>
+              <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 0.4rem;" data-i18n="results_hero_title">
+                Quiz Completed!
+              </h2>
+              <p style="color: var(--text-muted); font-size: 1rem;" data-i18n="results_hero_subtitle">
+                Here is your mastery evaluation and performance breakdown.
+              </p>
+            </div>
+
+            <!-- Detailed Stats Grid -->
+            <div class="stats-grid" style="margin-top: 1.5rem;">
+              <div class="stat-box">
+                <div class="stat-num" id="statTotal" style="color: var(--accent);">5</div>
+                <div class="stat-label" data-i18n="stat_total_questions">Total Questions</div>
+              </div>
+
+              <div class="stat-box">
+                <div class="stat-num" id="statCorrect" style="color: var(--success);">4</div>
+                <div class="stat-label" data-i18n="stat_correct_answers">Correct Answers</div>
+              </div>
+
+              <div class="stat-box">
+                <div class="stat-num" id="statAccuracy" style="color: var(--secondary);">80%</div>
+                <div class="stat-label" data-i18n="stat_accuracy">Accuracy Rate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Structured Comparison Table Section -->
+      <section class="glass-card table-card">
+        <div class="table-header-wrap">
+          <h3 class="table-title" data-i18n="table_heading">Question Review & Detailed Explanations</h3>
+        </div>
+
+        <div class="table-scroll">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th data-i18n="table_col_num">#</th>
+                <th data-i18n="table_col_question">Question</th>
+                <th data-i18n="table_col_your_answer">Your Answer</th>
+                <th data-i18n="table_col_correct_answer">Correct Answer</th>
+                <th data-i18n="table_col_status">Status</th>
+                <th data-i18n="table_col_explanation">Key Insight</th>
+              </tr>
+            </thead>
+            <tbody id="comparisonTableBody">
+              <!-- Dynamically rendered via results.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Glowing CTA Button to Restart the Process -->
+      <div class="restart-footer">
+        <button type="button" id="restartBtn" class="btn-primary-3d btn-restart">
+          <span>🔄</span>
+          <span data-i18n="btn_restart_quiz">Restart & Try Another Topic</span>
+        </button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p data-i18n="footer_text">© 2025 AuraLearn 3D EdTech. Interactive immersive learning platform.</p>
+    </footer>
+  </div>
+</body>
+</html>
